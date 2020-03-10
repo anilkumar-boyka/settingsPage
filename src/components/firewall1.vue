@@ -2,7 +2,7 @@
   <div class="firewall">
     <div>
         <h2>Firewall 1</h2>
-        <b-form method="post">
+        <b-form >
           <div class="mx-auto labels" style="width: 500px;">
             <b-form-group label="Ip address:" >
                 <b-form-input
@@ -15,6 +15,7 @@
             <b-form-group label="Username:">
                 <b-form-input
                     type="text"
+                    v-model="username"
                     required
                     placeholder="Enter username">
                 </b-form-input>
@@ -28,12 +29,14 @@
               </b-form-group>
           </div>
           <!-- <button v-on:click.prevent="saveData()">Save data</button> -->
-          <b-button variant="secondary"v-on:click.prevent="saveData()" >Update</b-button>
+          <b-button type="submit" variant="secondary" v-on:click="saveData()" >Update</b-button>
+          <b-button  class="showButton" variant="secondary" v-on:click="showData()">click here to show data</b-button>
         </b-form>
         <div>
-          <b-button m-t=1 variant="secondary"v-on:click="showData()">click here to show data</b-button>
-          <div v-if='show'>
-            {{showData()}}
+          
+          <div class="info" v-if='show'>
+            <span>Ip address - {{ip}}<br></span>
+            Username - {{uname}}
           </div>  
         </div>
       <hr>
@@ -54,9 +57,12 @@ export default {
     return {
       username: '',
       password: '',
-      ip_Info: null,
+      ip_Info: '',
       data:{},
-      show : 0
+      show : 0,
+      ip :'',
+      pswd :'',
+      uname : ''
     }
   },
   methods: {
@@ -66,25 +72,30 @@ export default {
 
     },
     showData: function () {
-      this.show=1;
-      console.log('showData')
-      return 4;
-
+      var vm=this;
+      var todoRef = firebase.database().ref("items/");
+      todoRef.on("value", function(snapshot) {
+        console.log(snapshot.val()[0].ip_address)
+        vm.ip = snapshot.val()[0].ip_address;
+        vm.uname = snapshot.val()[0].user_name;
+        vm.show=1;
+      });
     },
     saveData:function () {
+      var vm=this;
       console.log('hello');
       this.$http.post('https://jsonplaceholder.typicode.com/posts',{
-        userName:this.userName,
-        passWord:this.password,
-        ipinfo:this.ip_Info,
+        userName:vm.username,
+        passWord:vm.password,
+        ipinfo:vm.ip_Info,
       }).then(data=>console.log(data)).catch(err=>console.log('error is'+err));
        var info = firebase.database().ref();
-      info.child('items').push({
-          ip_address: 30,
-          user_name: 1,
-          passWord:this.password
-          
-      });
+      info.child('items').set([{
+          ip_address: vm.ip_Info,
+          user_name: vm.username,
+          passWord:vm.password
+      
+      }]);
     }
   },
   mounted(){
@@ -99,7 +110,7 @@ export default {
 .firewall{
   background-color:#f1f3f4;
   background-color:black;
-  height:100%;
+  height: 100%;
 }
 .labels{
   color:white
@@ -113,4 +124,18 @@ hr{
   color:white;
   border:1px solid white;
 }
+.info{
+  color : black;
+  margin: 50px;
+  padding:20px;
+  background-color:white;
+  font-family: 'Abril Fatface';
+  font-size: xx-large
+}
+.showButton{
+  margin-left: 100px;
+}
+/* span{ */
+  /* background-color: grey */
+/* } */
 </style>
