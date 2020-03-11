@@ -1,6 +1,7 @@
 <template>
  <div>
- 	<firewall1 :infos=info></firewall1>
+ 	<!-- <firewall1 :infos=info></firewall1> -->
+ 		<firewall1 v-for="(i,index) in info" :data=i :no=index></firewall1>
  </div>
 </template>
 

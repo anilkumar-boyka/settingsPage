@@ -1,7 +1,15 @@
 <template>
   <div class="firewall">
-    <!-- <div>
-        <h2>Firewall 1</h2>
+    <div class="info">
+      firewall {{no+1}}<br>
+      Ip Address - {{data.ip_address}}<br>
+      Username  - {{data.user_name}}<br>
+      Password - {{data.passWord}}
+      <span><b-button  class="showButton" variant="secondary" v-on:click="edit">Edit</b-button></span>
+    </div>
+    <!-- <firewall1/> -->
+  <!--   <div>
+        <h2>Firewall 1</h2> -->
           <div class="form" v-if="show_form">
             <b-form >
               <div class="mx-auto labels" style="width: 500px;">
@@ -29,11 +37,10 @@
                     </b-form-input>
                   </b-form-group>
               </div>
-              <b-button type="submit" variant="secondary" v-on:click="updateData()" >Update</b-button>
-              
+              <b-button type="submit" variant="secondary" v-on:click="updateData">Update</b-button>
             </b-form>
           </div>  
-        <div>
+        <!-- <div>
           <span v-if='show_button'><b-button  class="showButton" variant="secondary" v-on:click="showData()">click here to show data</b-button></span>
           <span v-if='edit_button'><b-button  class="showButton" variant="secondary" v-on:click="edit()">Edit</b-button></span>
           
@@ -41,50 +48,59 @@
             <span>Ip address - {{ip}}<br></span>
             Username - {{uname}}
           </div>  
-        </div>
+        </div> -->
       <hr>
-    </div>   -->
-    <ul>
-      <li v-for="(info,index) in infos">
-        <div class="data">
-          <h2>Firewall {{index+1}}</h2>
-          <div class="info">
-            Ip Address - {{info.ip_address}}<br>
-            Username - {{info.passWord}}
-          </div>
-        </div><hr>
-      </li>
-    </ul>
+    </div>   
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
 export default {
-  props : ['infos'],
+  props : ['data','no'],
   name: 'firewall1',
   data () {
     return {
-      // username: '',
-      // password: '',
-      // ip_Info: '',
+      username: '',
+      password: '',
+      ip_Info: '',
       // data:{},
       // show : 0,
       // ip :'',
       // pswd :'',
       // uname : '',
-      // show_form : 0,
+      show_form : 0,
       // edit_button : 0,
       // show_button : 0
     }
   },
   methods: {
+    edit:function () {
+      this.show_form = 1;
+    // const information ={
+    //     ip_address : this.ip_Info,
+    //     password : this.password,
+    //     user_name : this.username
+    //   }
+    },
+    updateData : function () {
+      console.log("update")
+      console.log(this.ip_Info)
+       const information ={
+        ip_address : this.ip_Info,
+        passWord : this.password,
+        user_name : this.username
+      }
+      console.log(information)
+
+    }
   },
   mounted(){
     console.log('inside f1 component');
-    console.log(this.infos);
+    console.log(this.data);
   }
 }
+
 
 </script>
 
@@ -115,10 +131,9 @@ hr{
   background-color:white;
   font-family: 'Abril Fatface';
   font-size: xx-large;
-  // opacity : 0.9;
 }
 .showButton{
-  margin-left: 100px;
+  float:right;
 }
 .data{
   color:white;
