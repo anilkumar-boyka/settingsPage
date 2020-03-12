@@ -1,19 +1,20 @@
 <template>
-  <div class="firewall"><span class = "Firewall_heading">Firewall {{no+1}}</span><br>
-    <b-container> 
-      <div class="info">
-        <b-row>
-          <b-col sm="3">Ip Address - {{data.ip_address}}</b-col><br>
-          <b-col sm="3">Username  - {{data.user_name}}</b-col><br>
-          <b-col sm="3">Password - {{data.passWord}}</b-col>
-          <b-col sm="3"><span><b-button  class="showButton" variant="secondary" v-on:click="edit">Edit</b-button></span></b-col>
-        </b-row>  
-      </div>
-      <div class="form" v-if="show_form">
-        <b-form>
-          <div class="labels">
-            <b-row>
-              <b-col>
+  <div class="firewall">
+    <div class="info">
+      <span class = "Firewall_heading">Firewall {{no+1}}</span><br>
+      <div class="mainInfo">
+      Ip Address - {{data.ip_address}}<br>
+      <span class = "username">Username  - {{data.user_name}}</span><br>
+      Password - {{data.passWord}}
+      <span><b-button  class="showButton" variant="secondary" v-on:click="edit">Edit</b-button></span>
+    </div>
+    </div>
+    <!-- <firewall1/> -->
+  <!--   <div>
+        <h2>Firewall 1</h2> -->
+          <div class="form" v-if="show_form">
+            <b-form >
+              <div class="mx-auto labels" style="width: 500px;">
                 <b-form-group label="Ip address:" >
                     <b-form-input
                       type="text"
@@ -22,36 +23,37 @@
                       placeholder="Enter Ip address">
                     </b-form-input>
                 </b-form-group>
-              </b-col>
-              <b-col> 
                 <b-form-group label="Username:">
                     <b-form-input
-                      type="text"
-                      v-model="username"
-                      required
-                      placeholder="Enter username">
+                        type="text"
+                        v-model="username"
+                        required
+                        placeholder="Enter username">
                     </b-form-input>
                 </b-form-group>
-              </b-col>
-              <b-col>
-                <b-form-group label="Your password:">
-                  <b-form-input type="password"
-                    v-model="password"
-                    required
-                    placeholder="Enter password">
-                  </b-form-input>
-                </b-form-group>
-              </b-col>  
-              <b-col> 
-                <b-button type="submit" class="updateButton" variant="secondary" v-on:click="updateData(no)">Update</b-button>
-              </b-col>  
-            </b-row>
-          </div>
-        </b-form>
-      </div>  
-    </b-container>
-    <hr>
-    </div>
+                  <b-form-group label="Your password:">
+                    <b-form-input type="password"
+                      v-model="password"
+                      required
+                      placeholder="Enter password">
+                    </b-form-input>
+                  </b-form-group>
+              </div>
+              <b-button type="submit" variant="secondary" v-on:click="updateData(no)">Update</b-button>
+            </b-form>
+          </div>  
+        <!-- <div>
+          <span v-if='show_button'><b-button  class="showButton" variant="secondary" v-on:click="showData()">click here to show data</b-button></span>
+          <span v-if='edit_button'><b-button  class="showButton" variant="secondary" v-on:click="edit()">Edit</b-button></span>
+          
+          <div class="info" v-if='show'>
+            <span>Ip address - {{ip}}<br></span>
+            Username - {{uname}}
+          </div>  
+        </div> -->
+      <hr>
+    </div>   
+  </div>
 </template>
 
 <script>
@@ -128,33 +130,31 @@ hr{
 }
 .info{
   color : white;
-  /*margin: 20px;
-  padding:10px;*/
+  margin: 20px;
+  padding:10px;
   background-color:black;
   font-family: 'Abril Fatface';
-  font-size: 20px;
+  font-size: 40px;
 }
-showButton{
+.showButton{
   float:right;
 }
 .data{
   color:white;
 }
 .Firewall_heading {
-  color: white;
-  font-size :xx-large;
-  margin:30px;
+
 }
 .username {
   margin-right:2px;
   text-indent :20%;
+  position : absolute;
+  margin-left :40px;
 
 }
 .mainInfo {
   font-size :25px;
+  position : relative;
 }
-.updateButton{
-  margin-top : 30px;
-}
-
 </style>
+

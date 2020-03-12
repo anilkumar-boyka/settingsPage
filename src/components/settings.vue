@@ -1,7 +1,7 @@
 <template>
  <div>
  	<!-- <firewall1 :infos=info></firewall1> -->
- 		<firewall1 v-for="(i,index) in info" :data=i :no=index></firewall1>
+ 		<firewall1 v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></firewall1>
  </div>
 </template>
 
@@ -19,25 +19,27 @@ export default {
     }
   },
   mounted() {
-  	  var vm=this;
-  	  var l;
+      this.retrieveData();
+  },
+  methods : {
+    updateData : function (receivedData) {
+      var index = receivedData.index.indexNo;
+      var todoRef = firebase.database();
+      todoRef.ref("items/"+index).update(
+       receivedData.data);
+    },
+    retrieveData : function () {
+      var vm=this;
+      var l;
       var todoRef = firebase.database().ref("items/");
       todoRef.on("value", function(snapshot) {
-      	l=snapshot.val().length;
-      	console.log('l is'+l)
-      	console.log(snapshot.val())
-      	vm.info = snapshot.val();
-      	console.log('info is')
-      	console.log(vm.info)
-      	// for(i=0;i<l;i++){
-      	// 	vm.info.push({snapshot.val()[i].})
-      	// }
-        // console.log(snapshot.val()[0].ip_address)
-        // vm.ip = snapshot.val()[0].ip_address;
-        // vm.uname = snapshot.val()[0].user_name;
-      });	
+        l=snapshot.val().length;
+        vm.info = snapshot.val();
+      });
+    }
+
   }
-}  
+}
 </script>
 
 
