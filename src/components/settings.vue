@@ -19,6 +19,7 @@ export default {
     }
   },
   mounted() {
+      console.log('hellooo')
       this.retrieveData();
   },
   methods : {

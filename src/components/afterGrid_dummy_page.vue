@@ -82,6 +82,7 @@ export default {
       username: '',
       password: '',
       ip_Info: '',
+      edit_button : 0
       // data:{},
       // show : 0,
       // ip :'',
@@ -89,7 +90,6 @@ export default {
       // uname : '',
       show_form : 0,
       // edit_button : 0,
-      // show_button : 0
     }
   },
   methods: {

@@ -6,7 +6,7 @@
           <b-col sm="3">Ip Address - {{data.ip_address}}</b-col><br>
           <b-col sm="3">Username  - {{data.user_name}}</b-col><br>
           <b-col sm="3">Password - {{data.passWord}}</b-col>
-          <b-col sm="3"><span><b-button  class="showButton" variant="secondary" v-on:click="edit">Edit</b-button></span></b-col>
+          <b-col sm="3"><span v-if="edit_button"><b-button  class="showButton" variant="secondary" v-on:click="edit">Edit</b-button></span></b-col>
         </b-row>  
       </div>
       <div class="form" v-if="show_form">
@@ -44,6 +44,7 @@
               </b-col>  
               <b-col> 
                 <b-button type="submit" class="updateButton" variant="secondary" v-on:click="updateData(no)">Update</b-button>
+                 <b-button class="cancelButton" variant="danger" v-on:click="cancelButton">Cancel</b-button>
               </b-col>  
             </b-row>
           </div>
@@ -70,13 +71,14 @@ export default {
       // pswd :'',
       // uname : '',
       show_form : 0,
-      // edit_button : 0,
+      edit_button : 1,
       // show_button : 0
     }
   },
   methods: {
     edit:function () {
       this.show_form = 1;
+      this.edit_button = 0;
     // const information ={
     //     ip_address : this.ip_Info,
     //     password : this.password,
@@ -84,18 +86,36 @@ export default {
     //   }
     },
     updateData : function (data) {
-       const information ={
-        data :{
-          ip_address : this.ip_Info,
-          passWord : this.password,
-          user_name : this.username,  
-        },
-        index : {
-          indexNo : data
-        }
+      if(this.ip_Info=='' ||this.username==''||this.password=='')
+      {
+        alert('Field value cannot be set empty')
       }
-      this.$emit('updateData',information);
-
+       else
+       {
+           const information ={
+            data :{
+              ip_address : this.ip_Info,
+              passWord : this.password,
+              user_name : this.username,  
+            },
+            index : {
+              indexNo : data
+            }
+          }
+          this.$emit('updateData',information);
+          this.show_form = 0;
+          this.edit_button = 1;
+          this.ip_Info = '';
+          this.username = '';
+          this.password = '';
+        }
+    },
+    cancelButton : function () {
+      this.show_form = 0;
+      this.edit_button = 1;
+      this.ip_Info = '';
+      this.username = '';
+      this.password = '';
     }
   },
   // mounted(){
@@ -144,6 +164,7 @@ showButton{
   color: white;
   font-size :xx-large;
   margin:30px;
+  font-family: 'Abril Fatface', cursive;
 }
 .username {
   margin-right:2px;
@@ -156,5 +177,7 @@ showButton{
 .updateButton{
   margin-top : 30px;
 }
-
+.cancelButton{
+  margin : 30px 0 0 10px;
+}
 </style>
