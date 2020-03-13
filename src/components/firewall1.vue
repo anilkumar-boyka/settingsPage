@@ -1,9 +1,9 @@
 <template>
   <div class="firewall"><span class = "Firewall_heading">Firewall {{no+1}}</span><br>
     <b-container> 
-      <div class="info">
+      <div class="info" v-if="show_info">
         <b-row>
-          <b-col sm="3">Ip Address - {{data.ip_address}}</b-col><br>
+          <b-col sm="3" >Ip Address - {{data.ip_address}}</b-col><br>
           <b-col sm="3">Username  - {{data.user_name}}</b-col><br>
           <b-col sm="3">Password - {{data.passWord}}</b-col>
           <b-col sm="3"><span v-if="edit_button"><b-button  class="showButton" variant="secondary" v-on:click="edit">Edit</b-button></span></b-col>
@@ -14,7 +14,7 @@
           <div class="labels">
             <b-row>
               <b-col>
-                <b-form-group label="Ip address:" >
+                <b-form-group class="form_input"label="Ip address:" >
                     <b-form-input
                       type="text"
                       v-model="ip_Info"
@@ -24,7 +24,7 @@
                 </b-form-group>
               </b-col>
               <b-col> 
-                <b-form-group label="Username:">
+                <b-form-group class="form_input" label="Username:">
                     <b-form-input
                       type="text"
                       v-model="username"
@@ -34,7 +34,7 @@
                 </b-form-group>
               </b-col>
               <b-col>
-                <b-form-group label="Your password:">
+                <b-form-group class="form_input" label="Your password:">
                   <b-form-input type="password"
                     v-model="password"
                     required
@@ -65,25 +65,16 @@ export default {
       username: '',
       password: '',
       ip_Info: '',
-      // data:{},
-      // show : 0,
-      // ip :'',
-      // pswd :'',
-      // uname : '',
+      show_info : 1,
       show_form : 0,
       edit_button : 1,
-      // show_button : 0
     }
   },
   methods: {
     edit:function () {
       this.show_form = 1;
       this.edit_button = 0;
-    // const information ={
-    //     ip_address : this.ip_Info,
-    //     password : this.password,
-    //     user_name : this.username
-    //   }
+      this.show_info = 0;
     },
     updateData : function (data) {
       if(this.ip_Info=='' ||this.username==''||this.password=='')
@@ -92,7 +83,7 @@ export default {
       }
        else
        {
-           const information ={
+          const information ={
             data :{
               ip_address : this.ip_Info,
               passWord : this.password,
@@ -108,20 +99,18 @@ export default {
           this.ip_Info = '';
           this.username = '';
           this.password = '';
+          this.show_info = 1;
         }
     },
     cancelButton : function () {
       this.show_form = 0;
       this.edit_button = 1;
+      this.show_info = 1;
       this.ip_Info = '';
       this.username = '';
       this.password = '';
     }
   },
-  // mounted(){
-  //   console.log('inside f1 component');
-  //   console.log(this.data);
-  // }
 }
 
 
@@ -148,23 +137,21 @@ hr{
 }
 .info{
   color : white;
-  /*margin: 20px;
-  padding:10px;*/
   background-color:black;
-  font-family: 'Abril Fatface';
+  font-family: 'Bebas Neue', cursive;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 20px;
-}
-showButton{
-  float:right;
 }
 .data{
   color:white;
 }
 .Firewall_heading {
+  height : 40px;
   color: white;
   font-size :xx-large;
-  margin:30px;
-  font-family: 'Abril Fatface', cursive;
+  margin:10px 0 50px 0;
+  display : inline-block;
+  font-family: 'Bebas Neue', cursive;
 }
 .username {
   margin-right:2px;
@@ -179,5 +166,8 @@ showButton{
 }
 .cancelButton{
   margin : 30px 0 0 10px;
+}
+.form_input{
+  color : grey;
 }
 </style>
