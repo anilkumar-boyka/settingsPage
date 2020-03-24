@@ -6,10 +6,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 import VueResource from 'vue-resource'
 import settings from '@/components/settings'
+import VueAnime from 'vue-animejs'
 
 Vue.use(Router)
 Vue.use(VueResource)
 Vue.use(BootstrapVue)
+Vue.use(VueAnime)
 
 export default new Router({
   routes: [

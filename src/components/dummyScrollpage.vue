@@ -10,7 +10,7 @@
                   <a href="#">Proxy</a>
                   <a href="#">Ips</a>
                 </span>
-                <span style="font-size:30px;cursor:pointer" v-on:click="openNavBar">&#9776;</span>
+                <span style="font-size:30px;cursor:pointer" v-on:click="openNav">&#9776;</span>
             
               <!-- <span class="sidenav_appear" v-on:click="navigation_bar">&#9776</span> -->
             </span><br>
@@ -130,14 +130,32 @@ export default {
       this.username = '';
       this.password = '';
     },
-    openNavBar : function () {
+    openNav : function () {
         document.getElementById("mySidenav").style.width = "250px";
+      // this.sidenav_appear_value = true;
+      // const targets = '.side_navigation';
+      // console.log(this.sidenav_appear_value);
+      
+    // this
+    //   .$anime
+    //   .timeline()
+    //   .add({
+    //     targets,
+       
+    //     scale : 3,
+    //     easing: 'easeOutExpo',
+    //   })
+      // .add({
+      //   targets,
+      //   translateX: -250,
+      //   easing: 'easeOutExpo',
+      // });
     },
     closeNav : function () {
     document.getElementById("mySidenav").style.width = "0";
   }
       
-},
+  },
   
 }
 
@@ -228,7 +246,7 @@ hr{
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #d1cebd;
+  background-color: white;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -238,16 +256,13 @@ hr{
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: black;
-  opacity: 0.8;
+  color: #818181;
   display: block;
   transition: 0.3s;
-  font-family: 'Bebas Neue', cursive;
-  font-size : 40px;
 }
 
 .sidenav a:hover {
-  color: grey;
+  color: #f1f1f1;
 }
 
 .sidenav .closebtn {

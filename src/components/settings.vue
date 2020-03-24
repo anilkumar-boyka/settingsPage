@@ -1,16 +1,25 @@
 <template>
  <div>
+   <!-- <h1>FIREWALL</h1> -->
+   
  		<firewall1 v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></firewall1>
+     <!-- <h1>PROXY</h1> -->
+     <proxy v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></proxy>
+     <ips v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></ips>
  </div>
 </template>
 
 <script>
 import firebase from 'firebase'
 import firewall1 from '@/components/firewall1'
+import proxy from '@/components/proxy'
+import ips from '@/components/ips'
 export default {
   name: 'settings',
   components : {
   	firewall1,
+    proxy,
+    ips
   },
   data () {
     return {
@@ -44,4 +53,8 @@ export default {
 
 
 <style scoped>
+/* h1{
+  background-color: aliceblue;
+  margin: 0 500px;
+} */
 </style>
