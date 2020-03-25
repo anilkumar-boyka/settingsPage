@@ -4,10 +4,10 @@
     <section id="1">
  		  <firewall1 v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></firewall1>
     </section>
-    <section id = "2">
+    <section id="2">
       <proxy v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></proxy>
     </section>  
-    <section id ="3">
+    <section id="3">
       <ips v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></ips>
     </section>    
  </div>

@@ -162,6 +162,7 @@ h2{
 hr{
   color:white;
   border:1px solid white;
+  margin-bottom: 0;
 }
 .info{
   color : white;
@@ -259,5 +260,7 @@ hr{
 }
 .navIcon{
   position: fixed;
+  margin-bottom:3px;
+  z-index: 1;
 }
 </style>
