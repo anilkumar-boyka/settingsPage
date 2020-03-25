@@ -6,11 +6,11 @@
             <span v-if="no+1==1" class="side_navigation">
               <span id="mySidenav" class="sidenav">
                   <a href="javascript:void(0)" class="closebtn" v-on:click="closeNav">&times;</a>
-                  <a href="#">Firewall</a>
-                  <a href="#">Proxy</a>
-                  <a href="#">Ips</a>
+                  <a href="#1">Firewall</a>
+                  <a href="#2">Proxy</a>
+                  <a href="#3">Ips</a>
                 </span>
-                <span style="font-size:30px;cursor:pointer" v-on:click="openNavBar">&#9776;</span>
+                <span class="navIcon" style="font-size:30px;cursor:pointer" v-on:click="openNavBar">&#9776;</span>
             
               <!-- <span class="sidenav_appear" v-on:click="navigation_bar">&#9776</span> -->
             </span><br>
@@ -256,5 +256,8 @@ hr{
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+}
+.navIcon{
+  position: fixed;
 }
 </style>

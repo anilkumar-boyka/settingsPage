@@ -1,11 +1,15 @@
 <template>
  <div>
    <!-- <h1>FIREWALL</h1> -->
-   
- 		<firewall1 v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></firewall1>
-     <!-- <h1>PROXY</h1> -->
-     <proxy v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></proxy>
-     <ips v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></ips>
+    <section id="1">
+ 		  <firewall1 v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></firewall1>
+    </section>
+    <section id = "2">
+      <proxy v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></proxy>
+    </section>  
+    <section id ="3">
+      <ips v-for="(i,index) in info" :data=i :no=index v-on:updateData="updateData($event)"></ips>
+    </section>    
  </div>
 </template>
 
@@ -29,6 +33,7 @@ export default {
   mounted() {
       console.log('hellooo')
       this.retrieveData();
+      this.router.push('/');
   },
   methods : {
     updateData : function (receivedData) {
