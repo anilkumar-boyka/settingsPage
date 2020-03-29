@@ -3,17 +3,17 @@
       <b-row>
         <b-col>
             <span class = "Firewall_heading">Firewall {{no+1}}</span>
-            <span v-if="no+1==1" class="side_navigation">
-              <span id="mySidenav" class="sidenav">
-                  <a href="javascript:void(0)" class="closebtn" v-on:click="closeNav">&times;</a>
+            <!-- <span v-if="no+1==1" class="side_navigation"> -->
+              <!-- <span id="mySidenav" class="sidenav">
+                  <a>Go to</a>
                   <a href="#1">Firewall</a>
                   <a href="#2">Proxy</a>
                   <a href="#3">Ips</a>
-                </span>
-                <span class="navIcon" style="font-size:30px;cursor:pointer" v-on:click="openNavBar">&#9776;</span>
+                </span> -->
+                <!-- <span class="navIcon" style="font-size:30px;cursor:pointer" v-on:click="openNavBar">&#9776;</span> -->
             
               <!-- <span class="sidenav_appear" v-on:click="navigation_bar">&#9776</span> -->
-            </span><br>
+            <!-- </span><br> -->
         </b-col>
         <!-- <b-col  md="2" sm="1"><span>yo</span></b-col> -->
       </b-row>
@@ -95,6 +95,7 @@ export default {
       this.show_form = 1;
       this.edit_button = 0;
       this.show_info = 0;
+      this.$emit('toggle_nav_bar',0);
     },
     updateData : function (data) {
       if(this.ip_Info=='' ||this.username==''||this.password=='')
@@ -120,6 +121,7 @@ export default {
           this.username = '';
           this.password = '';
           this.show_info = 1;
+          
         }
     },
     cancelButton : function () {
@@ -129,14 +131,15 @@ export default {
       this.ip_Info = '';
       this.username = '';
       this.password = '';
+      this.$emit('cancel_edit');
+      
     },
     openNavBar : function () {
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "150px";
     },
     closeNav : function () {
-    document.getElementById("mySidenav").style.width = "0";
-  }
-      
+      document.getElementById("mySidenav").style.width = "0";
+    },
 },
   
 }
@@ -223,7 +226,7 @@ hr{
   left : 100px;
 }  */
 .sidenav {
-  height: 50%;
+  height: 40%;
   width: 0%;
   position: fixed;
   z-index: 1;
@@ -244,11 +247,7 @@ hr{
   display: block;
   transition: 0.3s;
   font-family: 'Bebas Neue', cursive;
-  font-size : 40px;
-}
-
-.sidenav a:hover {
-  color: grey;
+  font-size : 30px;
 }
 
 .sidenav .closebtn {
@@ -258,9 +257,9 @@ hr{
   font-size: 36px;
   margin-left: 50px;
 }
-.navIcon{
+/* .navIcon{
   position: fixed;
   margin-bottom:3px;
   z-index: 1;
-}
+} */
 </style>

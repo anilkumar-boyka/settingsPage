@@ -75,6 +75,7 @@ export default {
       this.show_form = 1;
       this.edit_button = 0;
       this.show_info = 0;
+      this.$emit('toggle_nav_bar',0);
     },
     updateData : function (data) {
       if(this.ip_Info=='' ||this.username==''||this.password=='')
@@ -109,6 +110,7 @@ export default {
       this.ip_Info = '';
       this.username = '';
       this.password = '';
+      this.$emit('cancel_edit');
     }
   },
 }
